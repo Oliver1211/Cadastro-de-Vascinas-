@@ -1,0 +1,75 @@
+------------Login -------------
+
+create database cadastro_login;
+USE cadastro_login;
+CREATE TABLE tb_usuario (nome varchar(100), senha varchar(100));
+insert into tb_usuario(nome, senha) values ("admin","admin");
+
+select * from tb_usuario;
+
+------- cadastro paciente ------------
+
+create database pacientes;
+use pacientes;
+
+create table cadastro_paciente(
+Nome_Completo varchar(100), 
+Data_Nascimento date, 
+Email varchar(100),
+RG  varchar(100),
+CPF  varchar(100) not null primary key,
+Endereço   varchar(100),
+CEP  varchar(100),
+Cidade  varchar(100),
+UF  varchar(100),
+Telefone  varchar(100));
+
+insert into cadastro_paciente(Nome_Completo,
+Data_Nascimento,
+Email,
+RG,
+CPF,
+Endereço,
+CEP,
+Cidade,
+UF,
+Telefone) 
+values("Andrey Oliveira",
+"2001-12-25",
+"andrey@gmail.com",
+"321.321.321-32",
+"87",
+"Rua Taquari",
+"546 ",
+"São Paulo",
+"SP",
+"2799-1677");
+
+
+---------Cadastro Vacinas----------
+use pacientes;
+create table cadastro_vacina(
+CPF_Paciente varchar(100) not null primary key,
+Nome_Vacina varchar(100),
+Data_Vacina date,
+Possui_Segunda_dose varchar(10),
+FOREIGN KEY (CPF_Paciente) REFERENCES cadastro_paciente(CPF));
+
+insert into cadastro_vacina(
+CPF_Paciente,
+Nome_Vacina,
+Data_Vacina,
+Possui_Segunda_dose)
+values("87",
+"GRIPE",
+"2023-11-25",
+"NÃO");
+
+SELECT *
+FROM cadastro_paciente AS A
+RIGHT JOIN cadastro_vacina AS B
+ON A.CPF = B.CPF_Paciente
+
+
+
+    
